@@ -2,11 +2,15 @@ const yesButton = document.querySelector('#yes-button');
 const noButton = document.querySelector('#no-button');
 const response = document.querySelector('#response');
 const answerEndpoint = 'https://formsubmit.co/acaniexe@gmail.com';
-const submissionFrame = document.createElement('iframe');
-submissionFrame.name = 'answer-submission-frame';
-submissionFrame.title = 'Answer submission';
-submissionFrame.hidden = true;
-document.body.append(submissionFrame);
+
+const submittedAnswer = new URLSearchParams(window.location.search).get('answer');
+if (submittedAnswer === 'Yes' || submittedAnswer === 'No') {
+    response.textContent = submittedAnswer === 'Yes'
+        ? 'Thanks for answering! You just made me the happiest person 🌼'
+        : 'Thanks for answering. I appreciate you being honest.';
+    yesButton.hidden = true;
+    noButton.hidden = true;
+}
 
 function submitAnswer(answer) {
     if (window.location.protocol === 'file:') {
@@ -16,18 +20,21 @@ function submitAnswer(answer) {
 
     yesButton.disabled = true;
     noButton.disabled = true;
-    response.textContent = 'Opening the secure answer form...';
+    response.textContent = 'Sending your answer...';
 
     try {
         const form = document.createElement('form');
         form.action = answerEndpoint;
         form.method = 'POST';
-        form.target = submissionFrame.name;
         form.hidden = true;
+
+        const returnUrl = new URL(window.location.href);
+        returnUrl.searchParams.set('answer', answer);
 
         const fields = {
             name: 'Daisy',
             _subject: `Daisy answered: ${answer}`,
+            _next: returnUrl.href,
             answer,
             message: `Daisy answered: ${answer}`,
             _captcha: 'false'
@@ -43,14 +50,8 @@ function submitAnswer(answer) {
 
         document.body.append(form);
         form.submit();
-        form.remove();
-        response.textContent = answer === 'Yes'
-            ? 'Thanks for answering! You just made me the happiest person 🌼'
-            : 'Thanks for answering. I appreciate you being honest.';
-        yesButton.hidden = true;
-        noButton.hidden = true;
     } catch {
-        response.textContent = 'Sorry, the answer could not be submitted. Please try again.';
+        response.textContent = 'Sorry, the answer form could not be submitted. Please try again.';
         yesButton.disabled = false;
         noButton.disabled = false;
     }
