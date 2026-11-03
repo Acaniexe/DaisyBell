@@ -2,6 +2,11 @@ const yesButton = document.querySelector('#yes-button');
 const noButton = document.querySelector('#no-button');
 const response = document.querySelector('#response');
 const answerEndpoint = 'https://formsubmit.co/acaniexe@gmail.com';
+const submissionFrame = document.createElement('iframe');
+submissionFrame.name = 'answer-submission-frame';
+submissionFrame.title = 'Answer submission';
+submissionFrame.hidden = true;
+document.body.append(submissionFrame);
 
 function submitAnswer(answer) {
     if (window.location.protocol === 'file:') {
@@ -17,7 +22,7 @@ function submitAnswer(answer) {
         const form = document.createElement('form');
         form.action = answerEndpoint;
         form.method = 'POST';
-        form.target = '_blank';
+        form.target = submissionFrame.name;
         form.hidden = true;
 
         const fields = {
@@ -40,13 +45,12 @@ function submitAnswer(answer) {
         form.submit();
         form.remove();
         response.textContent = answer === 'Yes'
-            ? 'Your answer was submitted. You just made me the happiest person 🌼'
-            : 'Your answer was submitted. Thanks for being honest.';
-        response.textContent += ' Check the new tab for the email service’s confirmation.';
+            ? 'Thanks for answering! You just made me the happiest person 🌼'
+            : 'Thanks for answering. I appreciate you being honest.';
         yesButton.hidden = true;
         noButton.hidden = true;
     } catch {
-        response.textContent = 'Sorry, the answer form could not be opened. Please allow pop-ups and try again.';
+        response.textContent = 'Sorry, the answer could not be submitted. Please try again.';
         yesButton.disabled = false;
         noButton.disabled = false;
     }
