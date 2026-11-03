@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+:root {
+    color-scheme: light;
+    font-family: 'DM Sans', sans-serif;
+    color: #503b3c;
+    background: #fff4f2;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+}
+
+button {
+    font: inherit;
+}
+
+.page {
+    position: relative;
+    display: grid;
+    min-height: 100vh;
+    place-items: center;
+    overflow: hidden;
+    padding: 48px 20px 72px;
+    background:
+        radial-gradient(ellipse at 12% 18%, rgba(255, 213, 203, .45), transparent 30%),
+        radial-gradient(ellipse at 90% 82%, rgba(255, 222, 169, .34), transparent 28%),
+        #fff8f5;
+}
+
+.card {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 520px);
+    padding: 48px 46px 36px;
+    border: 1px solid rgba(226, 174, 166, .44);
+    border-radius: 28px;
+    background: rgba(255, 255, 255, .87);
+    box-shadow: 0 24px 70px rgba(132, 76, 73, .12);
+    text-align: center;
+    animation: arrive .7s ease-out both;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #aa7474;
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.eyebrow span {
+    color: #d98b91;
+    font-size: 1.15rem;
+}
+
+.bouquet {
+    display: grid;
+    width: 76px;
+    height: 76px;
+    margin: 25px auto 18px;
+    place-items: center;
+    border-radius: 50%;
+    background: #fff0dc;
+    font-size: 2.4rem;
+}
+
+.hello {
+    margin: 0 0 10px;
+    color: #c17f7f;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.4rem;
+    font-style: italic;
+}
+
+h1 {
+    margin: 0;
+    color: #513b3d;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 7vw, 2.8rem);
+    font-weight: 600;
+    line-height: 1.16;
+}
+
+.message {
+    max-width: 350px;
+    margin: 20px auto 12px;
+    color: #806b6a;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.ask {
+    margin: 0 0 24px;
+    color: #bd727b;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.55rem;
+    font-weight: 600;
+}
+
+.choices {
+    display: grid;
+    gap: 11px;
+}
+
+.button {
+    min-height: 50px;
+    padding: 12px 20px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: .95rem;
+    font-weight: 700;
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+}
+
+.button:focus-visible {
+    outline: 3px solid #d68d93;
+    outline-offset: 3px;
+}
+
+.button-yes {
+    color: white;
+    background: #c77f86;
+    box-shadow: 0 7px 16px rgba(175, 101, 111, .2);
+}
+
+.button-yes:hover {
+    background: #b96c76;
+    box-shadow: 0 9px 20px rgba(175, 101, 111, .28);
+}
+
+.button-talk {
+    color: #86696a;
+    border-color: #efdcda;
+    background: #fff;
+}
+
+.button-talk:hover {
+    background: #fff8f6;
+}
+
+.response {
+    min-height: 1.5em;
+    margin: 16px 0 0;
+    color: #a45e67;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.signoff {
+    margin: 17px 0 0;
+    color: #a38e8c;
+    font-size: .83rem;
+}
+
+.signoff span {
+    color: #d18b8d;
+}
+
+.footer {
+    position: absolute;
+    bottom: 24px;
+    margin: 0;
+    color: #b2938f;
+    font-size: .75rem;
+    letter-spacing: .06em;
+}
+
+.flower {
+    position: absolute;
+    color: rgba(213, 150, 143, .27);
+    font-size: clamp(7rem, 18vw, 13rem);
+    line-height: 1;
+    user-select: none;
+}
+
+.flower-left {
+    top: 5%;
+    left: 4%;
+    transform: rotate(-18deg);
+}
+
+.flower-right {
+    right: 3%;
+    bottom: 5%;
+    color: rgba(231, 183, 122, .3);
+    font-size: clamp(6rem, 15vw, 10rem);
+    transform: rotate(16deg);
+}
+
+@keyframes arrive {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 520px) {
+    .card {
+        padding: 38px 24px 30px;
+        border-radius: 24px;
+    }
+
+    .flower-left {
+        top: 2%;
+        left: -9%;
+    }
+
+    .flower-right {
+        right: -9%;
+        bottom: 3%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}
